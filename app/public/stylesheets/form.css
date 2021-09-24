@@ -1,0 +1,170 @@
+#mainForm {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+}
+
+#drawing {
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+#placement {
+    background-color: darkgrey;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+}
+
+#placement--row {
+    display: flex;
+}
+
+#matrix {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#select {
+    border-radius: 10px;
+    margin: 5px;
+    background-color: darkgrey;
+    width: 100%;
+}
+
+#questionnaire {
+    border-radius: 10px;
+    background-color: darkgrey;
+    padding: 20px;
+    margin: 10px;
+}
+
+#buttons {
+    margin: 5px;
+    margin-bottom: 20px;
+}
+
+.theme {
+    margin: 5px;
+}
+
+.theme__x {
+    writing-mode: vertical-rl;
+}
+
+.matrix--box {
+    background-color: darkgrey;
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.matrix--box img {
+    border-radius: 20%;
+    user-select: none;
+    width: 95%;
+    height: 95%;
+}
+
+#select--icons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.player--icon {
+    border-radius: 20%;
+    background-color: aliceblue;
+    width: 8.5%;
+    height: 8.5%;
+    user-select: none;
+}
+
+.theme {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: darkgrey;
+    color: aliceblue;
+    font-weight: bold;
+    font-size: larger;
+    user-select: none;
+    font-size: larger;
+    text-align: center;
+}
+
+.dummy {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+}
+
+#select--gui {
+    display: flex;
+}
+
+#formButton {
+    margin: 5px;
+    display: flex;
+}
+
+.twitter-share-button {
+    font-size: large;
+}
+
+#placement--clone {
+    padding: 5px;
+    border-radius: 10px;
+    width: 512px;
+    height: 512px;
+}
+
+.none {
+    display: none;
+}
+
+@media screen and (max-width:1024px) {
+    #drawing {
+        flex-wrap: wrap;
+    }
+    #placement {
+        background-color: darkgrey;
+        border-radius: 10px;
+        padding: 5px;
+        margin: 5px;
+        width: 100%;
+    }
+    #select {
+        border-radius: 10px;
+        margin: 5px;
+        background-color: darkgrey;
+        width: 100%;
+    }
+    #clear--button p {
+        font-size: 70%;
+    }
+    #select--search input {
+        width: 90%;
+        height: 80%;
+    }
+    .player--icon {
+        width: 12%;
+        height: 12%;
+    }
+    .theme {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: darkgrey;
+        color: aliceblue;
+        font-weight: normal;
+        font-size: medium;
+        user-select: none;
+        text-align: center;
+        margin: 2px;
+    }
+}

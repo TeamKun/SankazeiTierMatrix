@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- load lib -->
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="javascripts/lib/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="javascripts/lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="javascripts/lib/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="javascripts/lib/dblTap.js"></script>
+    <script type="text/javascript" src="javascripts/lib/html2canvas.min.js"></script>
+    <script type="text/javascript" src="stylesheets/lib/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <!-- load css -->
+    <link rel="stylesheet" href="stylesheets/reset.css">
+    <link rel="stylesheet" href="stylesheets/header.css">
+    <link rel="stylesheet" href="stylesheets/form.css">
+
+    <!-- load js -->
+    <script type="text/javascript" src="javascripts/util.js"></script>
+    <script type="text/javascript" src="javascripts/event.js"></script>
+    <script type="text/javascript" src="javascripts/matrix.js"></script>
+    <script type="text/javascript" src="javascripts/select.js"></script>
+    <script type="text/javascript" src="javascripts/form.js"></script>
+    <script type="text/javascript" src="javascripts/formId.js"></script>
+    <script type="text/javascript" src="javascripts/drag.js"></script>
+    <script type="text/javascript" src="javascripts/data.js"></script>
+    <script type="text/javascript" src="javascripts/downloadImg.js"></script>
+    <title>参加勢TierMatrix</title>
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <div class="logo ml-5">
+            参加勢TierMatrix
+        </div>
+    </header>
+    <!-- header -->
+    <!-- <form action='/' id="mainForm" class="mt-3" target="dummy" method="POST" id="mG61Hd"> -->
+    <form action='/' id="mainForm" class="mt-3" method="POST">
+        <div id="drawing">
+            <!-- 作図エリア -->
+            <div id="placement">
+                <div class="theme theme__y">
+                    <%= theme.positive_y%>
+                </div>
+                <div id="placement--row">
+                    <div class="theme theme__x">
+                        <%= theme.negative_x%>
+                    </div>
+                    <div id="matrix"></div>
+                    <div id="placement--form"></div>
+                    <div class="theme theme__x">
+                        <%= theme.positive_x%>
+                    </div>
+                </div>
+                <div class="theme theme__y">
+                    <%= theme.negative_y%>
+                </div>
+            </div>
+            <!-- 検索エリア -->
+            <div id="select">
+                <div id="selected--are">
+                    <input class="form-control" type="text" id="selected" class="" placeholder="選択中：" readonly>
+                </div>
+                <div id="select--content">
+                    <div id="select--input">
+                        <div id="select--gui" class="ml-4 mt-3 mb-3">
+                            <div id="clear--button">
+                                <button class="btn btn-primary mr-2" type="button">
+                                    <p>クリア</p>
+                                </button>
+                            </div>
+                            <div id="select--search">
+                                <input class="form-control" type="text" id="searchPlayer" placeholder="参加勢を検索">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="select--icons" class="ml-4 mb-3"></div>
+                </div>
+            </div>
+        </div>
+        <!-- アンケートエリア -->
+        <div id="questionnaire" class="form-group">
+            <div id="gender">
+                <label for="gender">性別:</label>
+                <select class="form-control" name="gender" id="gender--select">
+                    <% for(i in genders) {%>
+                        <option value=<%- genders[i].id%>>
+                            <%- genders[i].name%>
+                        </option>
+                        <% }%>
+                </select>
+            </div>
+            <div id="age">
+                <label class="mt-3" for="age">年齢:</label>
+                <select class="form-control" name="age" id="age--select">
+                    <% for(i in ages) {%>
+                        <option value=<%- ages[i].id%>>
+                            <%- ages[i].name%>
+                        </option>
+                        <% }%>
+                </select>
+            </div>
+            <div id="area">
+                <label class="mt-3" for="area">お住まいの地域:</label>
+                <select class="form-control" name="area" id="area--select">
+                    <% for(i in areas) {%>
+                        <option value=<%- areas[i].id%>>
+                            <%- areas[i].name%>
+                        </option>
+                        <% }%>
+                </select>
+            </div>
+            <div id="like">
+                <label class="mt-3" for="like">好きな参加勢:</label>
+                <select class="form-control" name="like" id="like--select">
+                    <option value="99">無回答</option>
+                    <% for(i in players) {%>
+                        <option value=<%- players[i].id%>>
+                            <%- players[i].mcid%>
+                        </option>
+                        <% }%>
+                </select>
+            </div>
+            <input id="device" name="device" type="hidden">
+        </div>
+        <div id="placement--clone" class="none"></div>
+        <!-- ボタン -->
+        <div id="formButton">
+            <div id="formButton--submit">
+                <button id="" class="btn btn-primary m-1" type="submit">
+                    <p>完成した表をTweetする</p>
+                </button>
+            </div>
+            <!-- <div id="formButton--download">
+                <button class="btn btn-secondary m-1" type="button">
+                    <p>画像をダウンロード</p>
+                </button>
+            </div>
+            <div id="formButton--tweet">
+                <button class="btn" type="button"></button>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="【ページのURL】" data-text="【ツイート本文】" data-via="【ユーザ名】" data-related="【ユーザ名】" data-count="【カウント表示の種類】" data-hashtags="【ハッシュタグ】">Tweet</a>
+            </div> -->
+        </div>
+
+        <!-- <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+                <title>ページのタイトル</title>
+                <meta property="og:title" content="参加勢TierMatrix" />
+                <meta property="og:type" content="ページの種類" />
+                <meta property="og:url" content="ページのURL" />
+                <meta property="og:image" content="https://www.fashion-press.net/img/news/74636/2jw.jpg" />
+                <meta property="og:site_name" content="サイト名" />
+                <meta property="og:description" content="ページのディスクリプション" />
+                <a href="http://twitter.com/share?url=http://127.0.0.1:5500/index.html&text=てすと" target="_blank">ツイート</a> -->
+    </form>
+    <!-- <iframe name="dummy" style="width:0px;height:0px;border:0px;"></iframe> -->
+    <% for (i in players) {%>
+        <input class="players" value=<%=JSON.stringify(players[i])%> hidden readonly>
+        <% } %>
+</body>
+
+</html>
