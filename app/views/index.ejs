@@ -21,13 +21,15 @@
     <!-- load js -->
     <script type="text/javascript" src="javascripts/util.js"></script>
     <script type="text/javascript" src="javascripts/event.js"></script>
-    <script type="text/javascript" src="javascripts/matrix.js"></script>
     <script type="text/javascript" src="javascripts/select.js"></script>
     <script type="text/javascript" src="javascripts/form.js"></script>
     <script type="text/javascript" src="javascripts/formId.js"></script>
     <script type="text/javascript" src="javascripts/drag.js"></script>
     <script type="text/javascript" src="javascripts/data.js"></script>
+    <script type="text/javascript" src="javascripts/PlayerList.js"></script>
+    <script type="text/javascript" src="javascripts/Player.js"></script>
     <script type="text/javascript" src="javascripts/downloadImg.js"></script>
+    <script type="text/javascript" src="javascripts/Store.js"></script>
     <title>参加勢TierMatrix</title>
 </head>
 
@@ -51,7 +53,7 @@
                     <div class="theme theme__x">
                         <%= theme.negative_x%>
                     </div>
-                    <div id="matrix"></div>
+                    <div id="graph"></div>
                     <div id="placement--form"></div>
                     <div class="theme theme__x">
                         <%= theme.positive_x%>
@@ -115,17 +117,6 @@
                         <% }%>
                 </select>
             </div>
-            <div id="like">
-                <label class="mt-3" for="like">好きな参加勢:</label>
-                <select class="form-control" name="like" id="like--select">
-                    <option value="99">無回答</option>
-                    <% for(i in players) {%>
-                        <option value=<%- players[i].id%>>
-                            <%- players[i].mcid%>
-                        </option>
-                        <% }%>
-                </select>
-            </div>
             <input id="device" name="device" type="hidden">
         </div>
         <div id="placement--clone" class="none"></div>
@@ -136,26 +127,8 @@
                     <p>完成した表をTweetする</p>
                 </button>
             </div>
-            <!-- <div id="formButton--download">
-                <button class="btn btn-secondary m-1" type="button">
-                    <p>画像をダウンロード</p>
-                </button>
-            </div>
-            <div id="formButton--tweet">
-                <button class="btn" type="button"></button>
-                <a href="https://twitter.com/share" class="twitter-share-button" data-url="【ページのURL】" data-text="【ツイート本文】" data-via="【ユーザ名】" data-related="【ユーザ名】" data-count="【カウント表示の種類】" data-hashtags="【ハッシュタグ】">Tweet</a>
-            </div> -->
         </div>
 
-        <!-- <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-                <title>ページのタイトル</title>
-                <meta property="og:title" content="参加勢TierMatrix" />
-                <meta property="og:type" content="ページの種類" />
-                <meta property="og:url" content="ページのURL" />
-                <meta property="og:image" content="https://www.fashion-press.net/img/news/74636/2jw.jpg" />
-                <meta property="og:site_name" content="サイト名" />
-                <meta property="og:description" content="ページのディスクリプション" />
-                <a href="http://twitter.com/share?url=http://127.0.0.1:5500/index.html&text=てすと" target="_blank">ツイート</a> -->
     </form>
     <!-- <iframe name="dummy" style="width:0px;height:0px;border:0px;"></iframe> -->
     <% for (i in players) {%>

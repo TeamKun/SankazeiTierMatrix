@@ -22,10 +22,13 @@
     display: flex;
 }
 
-#matrix {
+#graph {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    width: 45vw;
+    height: 45vw;
+    background-color: aliceblue;
 }
 
 #select {

@@ -5,15 +5,17 @@ let images = "";
  */
 function searchPlayer(string) {
     resultList = [];
-    for (const player of getCurrentPlayerList()) {
+    for (const player of Store.playerList.getNotSelectedList()) {
+
         if (player.mcid.toUpperCase().indexOf(string.toUpperCase()) > -1 ||
             player.name.indexOf(kanaToHira(string)) > -1) {
             resultList.push(player);
         }
-    }
-    images = ""
 
-    setImage(resultList);
+        images = ""
+
+        setImage(resultList);
+    }
 }
 
 /**
@@ -36,7 +38,7 @@ function setImage(playerNames) {
     }
     $("#select--icons").html(images);
     $(".player--icon").draggable({
-        revert: true,
+        revert: false,
         containment: '#drawing',
         zIndex: 100
     });
@@ -50,7 +52,7 @@ function getCurrentPlayerList() {
         return playerList;
     }
 
-    let currentPlayerList = playerList;
+    let currentPlayerList = Store.playerList.getList();
 
     // すでにマップに入っているplayerを削除
     for (let [k, v] of selectedPlayerMap) {

@@ -1,21 +1,15 @@
-let playerList = []
-    /**
-     * イベントリスナー
-     */
+/**
+ * イベントリスナー
+ */
 $(function() {
 
     /**
      * 画面ロード時
      */
     $(document).ready(() => {
-        let players = $(".players");
-        $.each(players, (i, element) => {
-            let val = $(element).val();
-            playerList.push(JSON.parse(val))
-        });
-        // マトリクスを配置
-        createMatrix()
-        setImage(playerList)
+        Store.playerList = new PlayerList($(".players"))
+
+        setImage(Store.playerList.getList())
         setInitialData();
 
         $('.player--icon').hover(
@@ -25,13 +19,15 @@ $(function() {
         /**
          * ドラッグ&ドロップ
          */
-        $(".matrix--box").droppable({
+        $("#graph").droppable({
             accept: ".player--icon",
             drop: function(event, ui) {
-                // プレイヤーを配置
+                //     // プレイヤーを配置
                 let playerName = ui.draggable.attr("alt")
-                let boxNumber = event.target.id
-                executeDrop(playerName, boxNumber)
+                    // let boxNumber = event.target.id
+                    // executeDrop(playerName, boxNumber)
+                let player = getPlayer(playerName);
+                player.selected = true
 
                 // リストの再取得
                 images = "";
