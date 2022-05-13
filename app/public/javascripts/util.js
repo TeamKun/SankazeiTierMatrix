@@ -26,3 +26,14 @@ function isTablet() {
     }
     return false;
 }
+
+/**
+ * imgタグを生成する
+ */
+function createImgTag(mcid) {
+    return `<img src="images/faceIcon/${mcid}.png" alt="${mcid}" class="player--icon">`;
+}
+
+function p() {
+    console.log("test")
+}

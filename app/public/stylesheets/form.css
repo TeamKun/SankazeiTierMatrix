@@ -15,7 +15,10 @@
     border-radius: 10px;
     padding: 5px;
     margin: 5px;
-    width: 100%;
+    width: 90vh;
+    height: 90vh;
+    max-width: 90vh;
+    max-height: 90vh;
 }
 
 #placement--row {
@@ -26,9 +29,9 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    width: 45vw;
-    height: 45vw;
     background-color: aliceblue;
+    width: 80vh;
+    height: 80vh;
 }
 
 #select {
@@ -56,6 +59,7 @@
 
 .theme__x {
     writing-mode: vertical-rl;
+    height: 80vh;
 }
 
 .matrix--box {
@@ -67,13 +71,6 @@
     justify-content: center;
 }
 
-.matrix--box img {
-    border-radius: 20%;
-    user-select: none;
-    width: 95%;
-    height: 95%;
-}
-
 #select--icons {
     display: flex;
     flex-wrap: wrap;
@@ -82,8 +79,8 @@
 .player--icon {
     border-radius: 20%;
     background-color: aliceblue;
-    width: 8.5%;
-    height: 8.5%;
+    width: 6vh;
+    height: 6vh;
     user-select: none;
 }
 

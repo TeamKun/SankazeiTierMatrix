@@ -42,55 +42,6 @@ function movePlayer(player, beforePosition, afterPosition) {
 }
 
 /**
- * imgタグを生成する
- */
-function createImgTag(playerName) {
-    let imageSrc = "images/faceIcon/" + playerName + ".png";
-    return '<img src="' + imageSrc + '" alt="' + playerName + '" class="dropArea player--icon">';
-}
-
-/**
- * ダミー画像を設置する
- */
-function setDummyImage(position) {
-    $("#" + position).html('<img src="images/faceIcon/dummy.png" alt="dummy" class="dropArea dummy">');
-}
-
-/**
- * 座標にプレイヤー画像を設置する
- */
-function setPlayerImage(position, playerName) {
-    $("#" + position).html(createImgTag(playerName));
-}
-
-/**
- * マップとformにプレイヤーをセットする
- */
-function setPlayer(position, playerName) {
-    selectedPlayerMap.set(position, playerName);
-    $("#boxForm--" + position).attr("value", getIdfromMcid(playerName));
-    setPlayerImage(position, playerName);
-}
-
-function getIdfromMcid(mcid) {
-    for (i in playerList) {
-        let player = playerList[i]
-        if (player.mcid === mcid) {
-            return player.id
-        }
-    }
-}
-/**
- * マップとformからプレイヤーを消去する
- */
-function deletePlayer(position) {
-    $("img").addClass("pointer-events-none")
-    selectedPlayerMap.delete(position);
-    $("#boxForm--" + position).attr("value", "0");
-    setDummyImage(position);
-}
-
-/**
  * 配置をクリア
  */
 function clearPlayer() {

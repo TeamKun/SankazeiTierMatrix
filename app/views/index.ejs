@@ -20,16 +20,22 @@
 
     <!-- load js -->
     <script type="text/javascript" src="javascripts/util.js"></script>
+    <script type="text/javascript" src="javascripts/State.js"></script>
+    <script type="text/javascript" src="javascripts/initialize.js"></script>
     <script type="text/javascript" src="javascripts/event.js"></script>
     <script type="text/javascript" src="javascripts/select.js"></script>
     <script type="text/javascript" src="javascripts/form.js"></script>
     <script type="text/javascript" src="javascripts/formId.js"></script>
     <script type="text/javascript" src="javascripts/drag.js"></script>
     <script type="text/javascript" src="javascripts/data.js"></script>
-    <script type="text/javascript" src="javascripts/PlayerList.js"></script>
-    <script type="text/javascript" src="javascripts/Player.js"></script>
+    <script type="text/javascript" src="javascripts/selectArea/selectArea.js"></script>
+    <script type="text/javascript" src="javascripts/selectArea/PlayerIconList.js"></script>
+    <script type="text/javascript" src="javascripts/selectArea/PlayerIcon.js"></script>
     <script type="text/javascript" src="javascripts/downloadImg.js"></script>
-    <script type="text/javascript" src="javascripts/Store.js"></script>
+    <script type="text/javascript" src="javascripts/graph/Graph.js"></script>
+    <script type="text/javascript" src="javascripts/graph/Vector2D.js"></script>
+
+
     <title>参加勢TierMatrix</title>
 </head>
 
@@ -132,7 +138,7 @@
     </form>
     <!-- <iframe name="dummy" style="width:0px;height:0px;border:0px;"></iframe> -->
     <% for (i in players) {%>
-        <input class="players" value=<%=JSON.stringify(players[i])%> hidden readonly>
+        <input class="playerMeta" value=<%=JSON.stringify(players[i])%> hidden readonly>
         <% } %>
 </body>
 

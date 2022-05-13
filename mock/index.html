@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../app/public/javascripts/lib/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="../app/public/javascripts/lib/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="../app/public/stylesheets/reset.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="graph">
+
+        </div>
+        <img src="../app/public/images/faceIcon/0paiti.png" alt="">
+        <input type="button" value="計算" onclick="buttonClick()">
+        <div class="inputs">
+            <label for="maxY">Y =
+            <input type="text" id="maxY">
+        </label>
+            <label for="minY">-Y =
+            <input type="text" id="minY">
+        </label>
+            <label for="maxX">X =
+            <input type="text" id="maxX">
+        </label>
+            <label for="maxX">-X =
+            <input type="text" id="minX">
+        </label>
+            <div>retrative</div>
+            <div class="inputs">
+                <label for="rMaxY">Y =
+                <input type="text" id="rMaxY">
+            </label>
+                <label for="rMinY">-Y =
+                <input type="text" id="rMinY">
+            </label>
+                <label for="rMaxX">X =
+                <input type="text" id="rMaxX">
+            </label>
+                <label for="rMinX">-X =
+                <input type="text" id="rMinX">
+            </label>
+                <label for="graphWidth">graphWidth =
+            <input type="text" id="graphWidth">
+            </label>
+                <div><br>
+                </div>
+            </div>
+            <div>icon</div>
+            <label for="iconX">X =
+                <input type="text" id="iconX">
+            </label>
+            <label for="iconY">Y =
+                <input type="text" id="iconY">
+            </label>
+            <div>iconRelative</div>
+            <label for="iconX">X =
+                <input type="text" id="rIconX">
+            </label>
+            <label for="iconY">Y =
+                <input type="text" id="rIconY">
+            </label>
+
+</body>
+<style>
+    .graph {
+        width: 50vw;
+        height: 50vw;
+        background-color: aquamarine;
+    }
+    
+    .icon {
+        background-color: pink;
+        align-items: flex-start;
+    }
+    
+    .container {
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .inputs {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    img {
+        width: 5vw;
+        height: 5vw;
+    }
+</style>
+
+</html>
+
+<script>
+    $("img").draggable({
+        revert: false,
+        containment: '.graph',
+        zIndex: 100
+    });
+
+    /**
+     * ドラッグ&ドロップ
+     */
+    $(".graph").droppable({
+        accept: "img",
+        drop: (event, ui) => {}
+    });
+
+
+
+    function buttonClick() {
+        //グラフの位置を取得
+
+
+
+        // if (graph.isIncluded(icon)) {
+        //     graph.calcRelativeCoordinates(icon)
+        // }
+
+        let graph = new Graph($(".graph"))
+
+        $("#maxY").val(graph.maxY)
+        $("#minY").val(graph.minY)
+        $("#maxX").val(graph.maxX)
+        $("#minX").val(graph.minX)
+        $("#graphWidth").val(graph.width)
+
+        $("#rMaxY").val(graph.relativeMaxY)
+        $("#rMinY").val(graph.relativeMinY)
+        $("#rMaxX").val(graph.relativeMaxX)
+        $("#rMinX").val(graph.relativeMinX)
+        $("#graphWidth").val(graph.width)
+
+        // アイコンを取得
+        let icon = new Icon($("img"), graph.width)
+        $("#iconX").val(icon.pointCenter.x)
+        $("#iconY").val(icon.pointCenter.y)
+
+        let rIcon = graph.calcRelativeCoordinates(icon)
+        $("#rIconX").val(rIcon.x)
+        $("#rIconY").val(rIcon.y)
+    }
+
+    class Graph {
+        constructor(graph) {
+            let offset = graph.offset()
+            this.width = graph.width()
+            this.maxX = offset.left + this.width
+            this.maxY = offset.top + this.width
+            this.minX = offset.left
+            this.minY = offset.top
+
+            //原点を(0,0)とする座標を取得
+            this.halfWidth = this.width / 2
+
+            // this.relativeMaxX = (this.maxX - this.minX) / 2
+            // this.relativeMaxY = (this.maxY - this.minY) / 2
+            // this.relativeMinX = (this.maxX - this.minX) / -2
+            // this.relativeMinY = (this.maxY - this.minY) / -2
+
+            // alert(
+            //     `
+            //     pointLeftTop: (${this.pointLeftTop.x},${this.pointLeftTop.y})\n
+            //     pointRightTop: (${this.pointRightTop.x},${this.pointRightTop.y})\n
+            //     pointLeftBottom: (${this.pointLeftBottom.x},${this.pointLeftBottom.y})\n
+            //     pointRightBottom: (${this.pointRightBottom.x},${this.pointRightBottom.y})\n
+            //     `
+            // )
+        }
+
+        isIncluded(icon) {
+            let point2D = icon.pointCenter
+            if ((this.pointLeftTop.x <= point2D.x && point2D.x <= this.pointRightTop.x) &&
+                (this.pointLeftTop.y <= point2D.y && point2D.y <= this.pointLeftBottom.y)) {
+                return true
+            }
+
+            return false
+        }
+
+        calcRelativeCoordinates(icon) {
+            //原点を(0,0)とする座標を取得
+            let x = (icon.pointCenter.x - (this.maxX / 2)) / this.halfWidth
+            let y = (icon.pointCenter.y - (this.maxY / 2)) / this.halfWidth
+
+            return new Point2D(x, y)
+        }
+    }
+
+    class Point2D {
+        constructor(x, y) {
+            this.x = x
+            this.y = y
+        }
+    }
+
+    class Icon {
+        constructor(icon, graphWidth) {
+            let offset = icon.offset()
+            let halfWidth = icon.width() / 2
+                // アイコンの中心座標を取得
+            this.pointCenter = new Point2D(offset.left + halfWidth, (graphWidth - offset.top) - halfWidth)
+        }
+    }
+</script>
