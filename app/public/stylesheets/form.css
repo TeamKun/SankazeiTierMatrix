@@ -1,24 +1,32 @@
-#mainForm {
-    width: 90%;
+.content {
+    width: 90vw;
     margin: 0 auto;
     display: grid;
 }
 
 #drawing {
-    margin: 5px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    margin-top: 2vh;
 }
 
 #placement {
     background-color: darkgrey;
+    justify-content: center;
+    align-items: center;
     border-radius: 10px;
-    padding: 5px;
-    margin: 5px;
     width: 90vh;
     height: 90vh;
+    min-width: 90vh;
+    min-height: 90vh;
     max-width: 90vh;
     max-height: 90vh;
+    margin-right: 2vw;
+}
+
+#placement .player--icon {
+    width: 4vh;
+    height: 4vh;
 }
 
 #placement--row {
@@ -27,18 +35,41 @@
 
 #graph {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
     background-color: aliceblue;
     width: 80vh;
     height: 80vh;
+    min-width: 80vh;
+    min-height: 80vh;
+    max-width: 80vh;
+    max-height: 80vh;
+}
+
+.inner--graph {
+    width: 50%;
+    height: 50%;
+    box-sizing: border-box;
+}
+
+.inner--graph.left {
+    border-right: 1px dashed rgb(116, 114, 114);
+}
+
+.inner--graph.right {
+    border-left: 1px dashed rgb(116, 114, 114);
+}
+
+.inner--graph.top {
+    border-bottom: 1px dashed rgb(116, 114, 114);
+}
+
+.inner--graph.bottom {
+    border-top: 1px dashed rgb(116, 114, 114);
 }
 
 #select {
     border-radius: 10px;
-    margin: 5px;
     background-color: darkgrey;
-    width: 100%;
 }
 
 #questionnaire {
@@ -51,24 +82,6 @@
 #buttons {
     margin: 5px;
     margin-bottom: 20px;
-}
-
-.theme {
-    margin: 5px;
-}
-
-.theme__x {
-    writing-mode: vertical-rl;
-    height: 80vh;
-}
-
-.matrix--box {
-    background-color: darkgrey;
-    width: calc(100% / 7);
-    height: calc(100% / 7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #select--icons {
@@ -86,13 +99,24 @@
 
 .theme {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-color: darkgrey;
     color: aliceblue;
     font-weight: bold;
-    font-size: larger;
     user-select: none;
-    font-size: larger;
     text-align: center;
+    line-height: 5vh;
+}
+
+.theme__x {
+    writing-mode: vertical-rl;
+    width: 5vh;
+    min-width: 5vh;
+    max-width: 5vh;
+}
+
+.theme__y {
+    height: 5vh;
+    min-height: 5vh;
+    max-height: 5vh;
 }
 
 .dummy {
@@ -127,6 +151,12 @@
 
 .none {
     display: none;
+}
+
+.removed {
+    opacity: 0;
+    user-select: none;
+    z-index: -1;
 }
 
 @media screen and (max-width:1024px) {

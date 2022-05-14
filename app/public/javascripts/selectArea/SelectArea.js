@@ -22,11 +22,16 @@ class SelectArea {
 
     select(mcid) {
         this.playIconList.select(mcid)
-        this.setIcons()
+        this.searchIcons($("#searchPlayer").val())
     }
 
     deselect(mcid) {
         this.playIconList.deselect(mcid)
-        this.setIcons()
+        this.searchIcons($("#searchPlayer").val())
+    }
+
+    reset() {
+        this.playIconList.reset()
+        this.searchIcons($("#searchPlayer").val())
     }
 }

@@ -17,24 +17,18 @@
     <link rel="stylesheet" href="stylesheets/reset.css">
     <link rel="stylesheet" href="stylesheets/header.css">
     <link rel="stylesheet" href="stylesheets/form.css">
-
     <!-- load js -->
     <script type="text/javascript" src="javascripts/util.js"></script>
     <script type="text/javascript" src="javascripts/State.js"></script>
     <script type="text/javascript" src="javascripts/initialize.js"></script>
     <script type="text/javascript" src="javascripts/event.js"></script>
-    <script type="text/javascript" src="javascripts/select.js"></script>
-    <script type="text/javascript" src="javascripts/form.js"></script>
-    <script type="text/javascript" src="javascripts/formId.js"></script>
-    <script type="text/javascript" src="javascripts/drag.js"></script>
-    <script type="text/javascript" src="javascripts/data.js"></script>
     <script type="text/javascript" src="javascripts/selectArea/selectArea.js"></script>
     <script type="text/javascript" src="javascripts/selectArea/PlayerIconList.js"></script>
     <script type="text/javascript" src="javascripts/selectArea/PlayerIcon.js"></script>
     <script type="text/javascript" src="javascripts/downloadImg.js"></script>
     <script type="text/javascript" src="javascripts/graph/Graph.js"></script>
     <script type="text/javascript" src="javascripts/graph/Vector2D.js"></script>
-
+    <script type="text/javascript" src="javascripts/submit.js"></script>
 
     <title>参加勢TierMatrix</title>
 </head>
@@ -47,26 +41,31 @@
         </div>
     </header>
     <!-- header -->
-    <!-- <form action='/' id="mainForm" class="mt-3" target="dummy" method="POST" id="mG61Hd"> -->
-    <form action='/' id="mainForm" class="mt-3" method="POST">
+
+    <div id="page--drawing">
         <div id="drawing">
             <!-- 作図エリア -->
             <div id="placement">
                 <div class="theme theme__y">
-                    <%= theme.positive_y%>
+                    <%= theme.positive_y %>
                 </div>
                 <div id="placement--row">
                     <div class="theme theme__x">
-                        <%= theme.negative_x%>
+                        <%= theme.negative_x %>
                     </div>
-                    <div id="graph"></div>
+                    <div id="graph">
+                        <div class="inner--graph left top"></div>
+                        <div class="inner--graph right top"></div>
+                        <div class="inner--graph left bottom"></div>
+                        <div class="inner--graph right bottom"></div>
+                    </div>
                     <div id="placement--form"></div>
                     <div class="theme theme__x">
-                        <%= theme.positive_x%>
+                        <%= theme.positive_x %>
                     </div>
                 </div>
                 <div class="theme theme__y">
-                    <%= theme.negative_y%>
+                    <%= theme.negative_y %>
                 </div>
             </div>
             <!-- 検索エリア -->
@@ -79,8 +78,8 @@
                         <div id="select--gui" class="ml-4 mt-3 mb-3">
                             <div id="clear--button">
                                 <button class="btn btn-primary mr-2" type="button">
-                                    <p>クリア</p>
-                                </button>
+                                        <p>配置をクリア</p>
+                                    </button>
                             </div>
                             <div id="select--search">
                                 <input class="form-control" type="text" id="searchPlayer" placeholder="参加勢を検索">
@@ -96,32 +95,32 @@
             <div id="gender">
                 <label for="gender">性別:</label>
                 <select class="form-control" name="gender" id="gender--select">
-                    <% for(i in genders) {%>
-                        <option value=<%- genders[i].id%>>
-                            <%- genders[i].name%>
-                        </option>
-                        <% }%>
-                </select>
+                        <% for(i in genders) {%>
+                            <option value=<%- genders[i].id%>>
+                                <%- genders[i].name%>
+                            </option>
+                            <% }%>
+                    </select>
             </div>
             <div id="age">
                 <label class="mt-3" for="age">年齢:</label>
                 <select class="form-control" name="age" id="age--select">
-                    <% for(i in ages) {%>
-                        <option value=<%- ages[i].id%>>
-                            <%- ages[i].name%>
-                        </option>
-                        <% }%>
-                </select>
+                        <% for(i in ages) {%>
+                            <option value=<%- ages[i].id%>>
+                                <%- ages[i].name%>
+                            </option>
+                            <% }%>
+                    </select>
             </div>
             <div id="area">
                 <label class="mt-3" for="area">お住まいの地域:</label>
                 <select class="form-control" name="area" id="area--select">
-                    <% for(i in areas) {%>
-                        <option value=<%- areas[i].id%>>
-                            <%- areas[i].name%>
-                        </option>
-                        <% }%>
-                </select>
+                        <% for(i in areas) {%>
+                            <option value=<%- areas[i].id%>>
+                                <%- areas[i].name%>
+                            </option>
+                            <% }%>
+                    </select>
             </div>
             <input id="device" name="device" type="hidden">
         </div>
@@ -129,17 +128,42 @@
         <!-- ボタン -->
         <div id="formButton">
             <div id="formButton--submit">
-                <button id="" class="btn btn-primary m-1" type="submit">
-                    <p>完成した表をTweetする</p>
-                </button>
+                <button id="complete" class="btn btn-primary m-1" type="button">
+                        <p>完成!!!</p>
+                    </button>
             </div>
         </div>
+        <!-- <iframe name="dummy" style="width:0px;height:0px;border:0px;"></iframe> -->
+        <% for (i in players) {%>
+            <input class="playerMeta" value=<%=JSON.stringify(players[i])%> hidden readonly>
+            <% } %>
+    </div>
 
-    </form>
-    <!-- <iframe name="dummy" style="width:0px;height:0px;border:0px;"></iframe> -->
-    <% for (i in players) {%>
-        <input class="playerMeta" value=<%=JSON.stringify(players[i])%> hidden readonly>
-        <% } %>
+    <div id="page--result">
+        <div id="placement">
+            <div class="theme theme__y">
+                <%= theme.positive_y %>
+            </div>
+            <div id="placement--row">
+                <div class="theme theme__x">
+                    <%= theme.negative_x %>
+                </div>
+                <div id="graph">
+                    <div class="inner--graph left top"></div>
+                    <div class="inner--graph right top"></div>
+                    <div class="inner--graph left bottom"></div>
+                    <div class="inner--graph right bottom"></div>
+                </div>
+                <div id="placement--form"></div>
+                <div class="theme theme__x">
+                    <%= theme.positive_x %>
+                </div>
+            </div>
+            <div class="theme theme__y">
+                <%= theme.negative_y %>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

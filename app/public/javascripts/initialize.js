@@ -11,5 +11,16 @@ $(() => {
     State.selectArea.setIcons()
 
     // グラフの初期化
-    State.graph = new Graph($("#graph"))
+    State.graph = new Graph($("#placement"))
+
+    calcTest()
 })
+
+function calcTest(icon, graphWidth) {
+    let p = (877.5 - 877)
+    let width = 877.5
+
+
+    let pos = (p - (width / 2)) / (width / 2)
+    console.log(pos)
+}

@@ -1,4 +1,5 @@
 class State {
-    static selectArea;
-    static graph;
+    static selectArea
+    static graph
+    static postData
 }

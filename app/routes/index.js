@@ -2,7 +2,6 @@ const { response } = require('express');
 let express = require('express');
 let router = express.Router();
 
-
 /* GET home page. */
 router.get('/', async function(req, res, next) {
     let connection = require('../db/connection.js')
@@ -17,12 +16,10 @@ router.get('/', async function(req, res, next) {
     });
 });
 
-router.post('/', async function(req, res, next) {
+router.post('/post', async(req, res, next) => {
     let connection = require('../db/connection.js')
-    console.log(req.body.gender)
-    console.log('ip : ' + req.ip)
-    await connection.post(req.body, req.ip)
-    res.redirect('/')
+        //await connection.post(req.body, req.ip)
+    console.log(req.body)
 });
 
 module.exports = router;

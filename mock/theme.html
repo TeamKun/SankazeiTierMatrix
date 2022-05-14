@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>参加勢TierMatrix</title>
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <div class="logo ml-5">
+            参加勢TierMatrix
+        </div>
+    </header>
+    <!-- header -->
+
+    <div class="content">
+        <div id="drawing">
+            <!-- 作図エリア -->
+            <div id="placement">
+                <div id="graph">
+                    <div class="theme themeX">信じる</div>
+                    <div class="theme themeX">裏切る</div>
+                    <div class="theme themeY">コロサナイ</div>
+                    <div class="theme themeY">コロス</div>
+                    <div class="inner--graph left top"></div>
+                    <div class="inner--graph right top"></div>
+                    <div class="inner--graph left bottom"></div>
+                    <div class="inner--graph right bottom"></div>
+
+                </div>
+            </div>
+            <!-- 検索エリア -->
+        </div>
+    </div>
+</body>
+
+<style>
+    .content {
+        width: 90vw;
+        margin: 0 auto;
+        display: grid;
+    }
+    
+    #drawing {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 2vh;
+    }
+    
+    #placement {
+        background-color: darkgrey;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        width: 90vh;
+        height: 90vh;
+        min-width: 90vh;
+        min-height: 90vh;
+        max-width: 90vh;
+        max-height: 90vh;
+        margin-right: 2vw;
+    }
+    
+    #placement .player--icon {
+        width: 4vh;
+        height: 4vh;
+    }
+    
+    #placement--row {
+        display: flex;
+    }
+    
+    #graph {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: aliceblue;
+        width: 80vh;
+        height: 80vh;
+        min-width: 80vh;
+        min-height: 80vh;
+        max-width: 80vh;
+        max-height: 80vh;
+        margin-top: 5vh;
+        margin-left: 5vh;
+    }
+    
+    .inner--graph {
+        width: 50%;
+        height: 50%;
+        box-sizing: border-box;
+    }
+    
+    .inner--graph.left {
+        border-right: 1px dashed rgb(116, 114, 114);
+    }
+    
+    .inner--graph.right {
+        border-left: 1px dashed rgb(116, 114, 114);
+    }
+    
+    .inner--graph.top {
+        border-bottom: 1px dashed rgb(116, 114, 114);
+    }
+    
+    .inner--graph.bottom {
+        border-top: 1px dashed rgb(116, 114, 114);
+    }
+    
+    #select {
+        border-radius: 10px;
+        background-color: darkgrey;
+    }
+    
+    #questionnaire {
+        border-radius: 10px;
+        background-color: darkgrey;
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    #buttons {
+        margin: 5px;
+        margin-bottom: 20px;
+    }
+    
+    .theme {}
+    
+    .theme__x {
+        writing-mode: vertical-rl;
+        height: 80vh;
+    }
+    
+    #select--icons {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .player--icon {
+        border-radius: 20%;
+        background-color: aliceblue;
+        width: 6vh;
+        height: 6vh;
+        user-select: none;
+    }
+    
+    .theme {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: darkgrey;
+        color: aliceblue;
+        font-weight: bold;
+        font-size: larger;
+        user-select: none;
+        font-size: larger;
+        text-align: center;
+    }
+    
+    .dummy {
+        user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+    }
+    
+    #select--gui {
+        display: flex;
+    }
+    
+    #formButton {
+        margin: 5px;
+        display: flex;
+    }
+    
+    .twitter-share-button {
+        font-size: large;
+    }
+    
+    #placement--clone {
+        padding: 5px;
+        border-radius: 10px;
+        width: 512px;
+        height: 512px;
+    }
+    
+    .none {
+        display: none;
+    }
+    
+    .removed {
+        opacity: 0;
+        user-select: none;
+        z-index: -1;
+    }
+    
+    @media screen and (max-width:1024px) {
+        #drawing {
+            flex-wrap: wrap;
+        }
+        #placement {
+            background-color: darkgrey;
+            border-radius: 10px;
+            padding: 5px;
+            margin: 5px;
+            width: 100%;
+        }
+        #select {
+            border-radius: 10px;
+            margin: 5px;
+            background-color: darkgrey;
+            width: 100%;
+        }
+        #clear--button p {
+            font-size: 70%;
+        }
+        #select--search input {
+            width: 90%;
+            height: 80%;
+        }
+        .player--icon {
+            width: 12%;
+            height: 12%;
+        }
+        .theme {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: darkgrey;
+            color: aliceblue;
+            font-weight: normal;
+            font-size: medium;
+            user-select: none;
+            text-align: center;
+            margin: 2px;
+        }
+    }
+</style>
+
+</html>

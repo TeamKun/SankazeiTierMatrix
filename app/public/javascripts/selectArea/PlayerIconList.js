@@ -45,6 +45,12 @@ class PlayerIconList {
         this.getPlayer(mcid).deselect()
     }
 
+    reset() {
+        for (const player of this.list) {
+            player.selected = false
+        }
+    }
+
     /**
      * プレイヤーを検索する
      */

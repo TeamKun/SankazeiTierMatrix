@@ -7,7 +7,7 @@ $(() => {
      * 検索時
      */
     let $input = $('#searchPlayer');
-    $input.on('input', function(event) {
+    $input.on('input', (event) => {
 
         State.selectArea.searchIcons($input.val())
     })
@@ -19,7 +19,7 @@ $(() => {
 
         // アイコンの消去
         let mcid = event.currentTarget.alt
-        event.currentTarget.remove()
+        $(event.currentTarget).addClass("removed")
 
         // リストの再取得
         State.selectArea.deselect(mcid)
@@ -27,6 +27,38 @@ $(() => {
             onHover
         );
 
+    })
+
+    /**
+     * クリアボタン
+     */
+    $("#clear--button > button").click(() => {
+        if (!confirm("アイコンの配置をクリアしますか?")) {
+            //キャンセルの時の処理
+            return false;
+        }
+
+        // 配置をクリア
+        State.selectArea.reset()
+
+        // グラフから削除
+        State.graph.resetIcons()
+
+        $('.player--icon').hover(
+            onHover
+        );
+    })
+
+    /**
+     * 完成ボタン
+     */
+    $("#complete").click(() => {
+        if (!confirm("完成で良いですか？")) {
+            //キャンセルの時の処理
+            return false;
+        }
+
+        submit()
     })
 
     /**
@@ -55,6 +87,14 @@ $(() => {
         }
     })
 
+    /**
+     * リロード確認
+     */
+    $(window).on('beforeunload', (event) => {
+        let message = '画面を更新すると配置がリセットされます\n更新しますか？';
+        event.returnValue = message;
+        return message;
+    });
 
     $('.player--icon').hover(
         onHover
